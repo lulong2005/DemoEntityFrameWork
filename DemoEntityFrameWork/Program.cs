@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DemoEntityFrameWork.Models;
+using Newtonsoft.Json;
 
 namespace DemoEntityFrameWork
 {
@@ -13,6 +15,16 @@ namespace DemoEntityFrameWork
             // The code provided will print ‘Hello World’ to the console.
             // Press Ctrl+F5 (or go to Debug > Start Without Debugging) to run your app.
             Console.WriteLine("Hello World!");
+            CategoryOfProduct categoryOfProduct = new CategoryOfProduct();
+            Product pro = new Product();
+            using (ProductDBContext db = new ProductDBContext())
+            {
+                pro = db.Products.Find(1);
+                categoryOfProduct = pro.categoryOfProduct;
+
+            }
+            string json = JsonConvert.SerializeObject(categoryOfProduct);
+            Console.WriteLine(json);
             Console.ReadKey();
 
             // Go to http://aka.ms/dotnet-get-started-console to continue learning how to build a console app! 
